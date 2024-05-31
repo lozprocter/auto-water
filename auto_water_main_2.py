@@ -1,21 +1,18 @@
 import tkinter as tk
 from tkinter import ttk
 
-
 class mainScreen:
-
     def __init__(self):
         self.root = tk.Tk()
 
         self.root.geometry('800x400')
         self.root.title('AutoWater')
 
-
-        #  Title label
+        # Title label
         self.title = tk.Label(self.root, text='AutoWater', font=('Montserrat', 28), bg='#17bf9b')
         self.title.pack(fill='x')
 
-        #  Manual on and off buttons
+        # Manual on and off buttons
         self.button_frame = tk.Frame(self.root)
         self.button_frame.columnconfigure(0, weight=1)
         self.button_frame.columnconfigure(1, weight=1)
@@ -36,24 +33,32 @@ class mainScreen:
 
         # Entry grid layout
         self.entry_frame = tk.Frame(self.params_frame)
+        self.entry_frame.columnconfigure(1, weight=1)
+        self.entry_frame.columnconfigure(2, weight=1)
+        
         def create_hrs_list():
             hrs_list = []
             for i in range(24):
                 hrs_list.append(i)
             return hrs_list
+        
         self.hr_dropdown = ttk.Combobox(self.entry_frame, state='readonly', values=create_hrs_list(), font=('Montserrat', 14), width=10)
         self.hr_dropdown.grid(row=0, column=1, sticky='nsew')
+        
         def create_minutes_list():
             minutes_list = []
             for i in range(60):
                 minutes_list.append(i)
             return minutes_list
+        
         self.min_dropdown = ttk.Combobox(self.entry_frame, state='readonly', values=create_minutes_list(), font=('Montserrat', 14), width=10)
         self.min_dropdown.grid(row=0, column=2, sticky='nsew')
-        self.volume_entry = tk.Entry(self.entry_frame, font=('Montserrat', 14))
-        self.volume_entry.grid(row=1, column=1, sticky='nsew')
+        
+        self.volume_entry = tk.Entry(self.entry_frame, font=('Montserrat', 14), width=20)
+        self.volume_entry.grid(row=1, column=1, columnspan=2, sticky='nsew')
+        
         self.volume_label_unit = tk.Label(self.entry_frame, text='ml', font=('Montserrat', 14))
-        self.volume_label_unit.grid(row=1, column=2, sticky='nsew')
+        self.volume_label_unit.grid(row=1, column=3, sticky='nsw')
 
         # Params frame
         self.label_frame.grid(row=0, column=0, padx=10)
